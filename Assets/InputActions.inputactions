@@ -1,0 +1,94 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "HandInteractions",
+            "id": "11d8c05e-3450-45d8-9075-2143dfa999c6",
+            "actions": [
+                {
+                    "name": "AttackWhite",
+                    "type": "Button",
+                    "id": "7c3065dc-32cd-4771-9fae-ddd284931fba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AttackBlack",
+                    "type": "Button",
+                    "id": "f29f7672-f3d2-40b9-95dd-d2f72defa323",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RetireWhite",
+                    "type": "Button",
+                    "id": "6b9bff51-ee7e-4037-89b3-68bb54be4aef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RetireBlack",
+                    "type": "Button",
+                    "id": "c815251d-f744-4fb7-90e2-f606b3cabaad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "37330b40-c7c4-4aa3-b6dc-52441b175a7d",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackWhite",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "711a5ad0-12b9-4e63-b7c5-4e7ae41d39ad",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RetireWhite",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dcd24e3-d142-4c02-a69e-cfc88e4e7f2a",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RetireBlack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cbe99b4-7cd7-4c19-b597-b56be9304fbb",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackBlack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
