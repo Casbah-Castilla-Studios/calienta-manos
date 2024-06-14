@@ -79,8 +79,6 @@ public class AnimationController : MonoBehaviour
     private IEnumerator SlerpParameter(Animator animator, string parameterName, float targetValue)
     {
         float startValue = animator.GetFloat(parameterName);
-        Vector3 startVector = new Vector3(startValue, 0, 0);
-        Vector3 targetVector = new Vector3(targetValue, 0, 0);
         float timeElapsed = 0f;
 
         Debug.Log($"Starting Slerp: {parameterName} from {startValue} to {targetValue} over {lerpDuration} seconds");
@@ -88,8 +86,7 @@ public class AnimationController : MonoBehaviour
         while (timeElapsed < lerpDuration)
         {
             timeElapsed += Time.deltaTime;
-            Vector3 newVector = Vector3.Slerp(startVector, targetVector, timeElapsed / lerpDuration);
-            float newValue = newVector.x; // Extract the interpolated value
+            float newValue = Mathf.Lerp(startValue, targetValue, timeElapsed / lerpDuration);
             Debug.Log($"Slerping {parameterName}: {newValue} at {timeElapsed}/{lerpDuration}");
             animator.SetFloat(parameterName, newValue);
             yield return null;
