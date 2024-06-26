@@ -81,18 +81,14 @@ public class AnimationController : MonoBehaviour
         float startValue = animator.GetFloat(parameterName);
         float timeElapsed = 0f;
 
-        Debug.Log($"Starting Slerp: {parameterName} from {startValue} to {targetValue} over {lerpDuration} seconds");
-
         while (timeElapsed < lerpDuration)
         {
             timeElapsed += Time.deltaTime;
             float newValue = Mathf.Lerp(startValue, targetValue, timeElapsed / lerpDuration);
-            Debug.Log($"Slerping {parameterName}: {newValue} at {timeElapsed}/{lerpDuration}");
             animator.SetFloat(parameterName, newValue);
             yield return null;
         }
 
         animator.SetFloat(parameterName, targetValue); // Ensure the target value is set at the end
-        Debug.Log($"Completed Slerp: {parameterName} set to {targetValue}");
     }
 }

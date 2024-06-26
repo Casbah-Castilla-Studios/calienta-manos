@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,7 +14,7 @@ public class GameManager : MonoBehaviour
         CheckHandTouch.OnHandTouched += HandleHandTouched;
         whiteHandPoints = 0;
         blackHandPoints = 0;
-}
+    }
 
     private void HandleHandTouched(Hand attackerHand, Hand defenderHand)
     {
@@ -25,7 +23,7 @@ public class GameManager : MonoBehaviour
         if (attackerHand == Hand.White)
         {
             whiteHandPoints++;
-            Debug.Log("Punto para la mano blanca. " +  whiteHandPoints);
+            Debug.Log("Punto para la mano blanca. " + whiteHandPoints);
         }
 
         if (attackerHand == Hand.Black)

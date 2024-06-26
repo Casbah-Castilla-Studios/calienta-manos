@@ -1,30 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
-public enum Hand { White, Black};
+public enum Hand { White, Black };
 
 public class CheckHandTouch : MonoBehaviour
 {
     [SerializeField] private Hand hand;
 
     private Hand enemyHand;
-    private BoxCollider boxCollider;
 
     public delegate void HandTouched(Hand hand, Hand enemyHand);
     public static event HandTouched OnHandTouched;
 
     public Hand Hand { get => hand; }
 
-    private void Start()
-    {
-        boxCollider = GetComponent<BoxCollider>();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("OnCollisionEnter");
+        Debug.Log($"OnCollisionEnter with {collision.transform.name}");
 
         if (collision == null)
         {
@@ -32,15 +23,13 @@ public class CheckHandTouch : MonoBehaviour
             return;
         }
 
-        CheckHandTouch enemyCheckHandTouch = collision.transform.GetComponent<CheckHandTouch>();
-
-        if (enemyCheckHandTouch == null)
+        if (!collision.transform.TryGetComponent<CheckHandTouch>(out var enemyCheckHandTouch))
         {
             Debug.LogError("Objeto colisionado sin componente CheckHandTouch");
             return;
         }
 
         enemyHand = enemyCheckHandTouch.Hand;
-        if(OnHandTouched != null) OnHandTouched(hand, enemyHand);
+        OnHandTouched?.Invoke(hand, enemyHand);
     }
 }
