@@ -4,9 +4,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject whiteHand;
     [SerializeField] private GameObject blackHand;
-    private Hand handAttacking;
+    [SerializeField] private Hand handAttacking;
     private int whiteHandPoints;
     private int blackHandPoints;
+
+    public delegate void HandScore(Hand hand, int points);
+    public static event HandScore OnHandScore;
 
     private void Awake()
     {
@@ -23,13 +26,20 @@ public class GameManager : MonoBehaviour
         if (attackerHand == Hand.White)
         {
             whiteHandPoints++;
+            OnHandScore?.Invoke(handAttacking, whiteHandPoints);
             Debug.Log("Punto para la mano blanca. " + whiteHandPoints);
         }
 
         if (attackerHand == Hand.Black)
         {
             blackHandPoints++;
+            OnHandScore?.Invoke(handAttacking, blackHandPoints);
             Debug.Log("Punto para la mano negra. " + blackHandPoints);
         }
+    }
+
+    private void OnDestroy()
+    {
+        CheckHandTouch.OnHandTouched -= HandleHandTouched;
     }
 }
