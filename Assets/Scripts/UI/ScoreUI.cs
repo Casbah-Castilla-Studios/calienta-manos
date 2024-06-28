@@ -1,33 +1,38 @@
+using Calientamanos.Enums;
+using Calientamanos.Managers;
 using TMPro;
 using UnityEngine;
 
-public class ScoreUI : MonoBehaviour
+namespace Calientamanos.UI
 {
-    [SerializeField] private TextMeshProUGUI whiteHandPointsTMP;
-    [SerializeField] private TextMeshProUGUI blackHandPointsTMP;
-
-    private void Awake()
+    public class ScoreUI : MonoBehaviour
     {
-        GameManager.OnHandScore += HandleHandScore;
-        whiteHandPointsTMP.text = "0";
-        blackHandPointsTMP.text = "0";
-    }
+        [SerializeField] private TextMeshProUGUI whiteHandPointsTMP;
+        [SerializeField] private TextMeshProUGUI blackHandPointsTMP;
 
-    private void HandleHandScore(Hand hand, int points)
-    {
-        if (hand == Hand.White)
+        private void Awake()
         {
-            whiteHandPointsTMP.text = points.ToString();
+            GameManager.OnHandScore += HandleHandScore;
+            whiteHandPointsTMP.text = "0";
+            blackHandPointsTMP.text = "0";
         }
 
-        if (hand == Hand.Black)
+        private void HandleHandScore(EHand hand, int points)
         {
-            blackHandPointsTMP.text = points.ToString();
-        }
-    }
+            if (hand == EHand.White)
+            {
+                whiteHandPointsTMP.text = points.ToString();
+            }
 
-    private void OnDestroy()
-    {
-        GameManager.OnHandScore -= HandleHandScore;
+            if (hand == EHand.Black)
+            {
+                blackHandPointsTMP.text = points.ToString();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.OnHandScore -= HandleHandScore;
+        }
     }
 }

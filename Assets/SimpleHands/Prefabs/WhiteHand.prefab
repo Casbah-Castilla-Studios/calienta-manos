@@ -11,11 +11,13 @@ GameObject:
   - component: {fileID: 705561775665358165}
   - component: {fileID: 497982216308674865}
   - component: {fileID: 6488843191340939966}
-  - component: {fileID: 1051076232997921317}
   - component: {fileID: 6774608270342730194}
+  - component: {fileID: 1051076232997921317}
+  - component: {fileID: 4709306753713059396}
+  - component: {fileID: 6311340301968613883}
   m_Layer: 0
   m_Name: WhiteHand
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,19 +81,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.61285067, y: 0.15983412, z: 0.9915039}
   m_Center: {x: -0.004608929, y: -0.0021923296, z: -0.112021536}
---- !u!114 &1051076232997921317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180557533655662575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc485e066ace2994586c353fa3ebee03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: 0
 --- !u!54 &6774608270342730194
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,6 +108,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1051076232997921317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180557533655662575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc485e066ace2994586c353fa3ebee03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: 0
+--- !u!114 &4709306753713059396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180557533655662575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd335a1d9b6752f4d9000591418ff955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 0
+  slapCooldown: 1
+  transitionDuration: 0.5
+  canSlap: 0
+--- !u!114 &6311340301968613883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180557533655662575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d19948c0ff6a84418fd9238654fcf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackAction: {fileID: 5591758678343231331, guid: 469b8d6060ec31e43a8bd8203d42c361, type: 3}
+  retireAction: {fileID: -763045312870249607, guid: 469b8d6060ec31e43a8bd8203d42c361, type: 3}
+  lerpDuration: 0.3
 --- !u!1 &914044531976162097
 GameObject:
   m_ObjectHideFlags: 0

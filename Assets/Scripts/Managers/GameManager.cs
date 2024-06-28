@@ -1,45 +1,53 @@
+using Calientamanos.Enums;
+using Calientamanos.Gameplay;
+using Calientamanos.Utils;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Calientamanos.Managers
 {
-    [SerializeField] private GameObject whiteHand;
-    [SerializeField] private GameObject blackHand;
-    [SerializeField] private Hand handAttacking;
-    private int whiteHandPoints;
-    private int blackHandPoints;
-
-    public delegate void HandScore(Hand hand, int points);
-    public static event HandScore OnHandScore;
-
-    private void Awake()
+    public class GameManager : Singleton<GameManager>
     {
-        handAttacking = Hand.Black;
-        CheckHandTouch.OnHandTouched += HandleHandTouched;
-        whiteHandPoints = 0;
-        blackHandPoints = 0;
-    }
+        [SerializeField] private GameObject whiteHand;
+        [SerializeField] private GameObject blackHand;
+        [SerializeField] private EHand handAttacking;
+        private int whiteHandPoints;
+        private int blackHandPoints;
 
-    private void HandleHandTouched(Hand attackerHand, Hand defenderHand)
-    {
-        if (attackerHand != handAttacking) return;
+        public delegate void HandScore(EHand hand, int points);
+        public static event HandScore OnHandScore;
 
-        if (attackerHand == Hand.White)
+        protected override void Awake()
         {
-            whiteHandPoints++;
-            OnHandScore?.Invoke(handAttacking, whiteHandPoints);
-            Debug.Log("Punto para la mano blanca. " + whiteHandPoints);
+            base.Awake();
+            handAttacking = EHand.Black;
+            CheckHandTouch.OnHandTouched += HandleHandTouched;
+            whiteHandPoints = 0;
+            blackHandPoints = 0;
         }
 
-        if (attackerHand == Hand.Black)
+        private void OnDestroy()
         {
-            blackHandPoints++;
-            OnHandScore?.Invoke(handAttacking, blackHandPoints);
-            Debug.Log("Punto para la mano negra. " + blackHandPoints);
+            CheckHandTouch.OnHandTouched -= HandleHandTouched;
         }
-    }
 
-    private void OnDestroy()
-    {
-        CheckHandTouch.OnHandTouched -= HandleHandTouched;
+        private void HandleHandTouched(EHand attackerHand, EHand defenderHand)
+        {
+            if (attackerHand != handAttacking) return;
+
+            if (attackerHand == EHand.White)
+            {
+                whiteHandPoints++;
+                OnHandScore?.Invoke(handAttacking, whiteHandPoints);
+                Debug.Log("Punto para la mano blanca. " + whiteHandPoints);
+            }
+
+            if (attackerHand == EHand.Black)
+            {
+                blackHandPoints++;
+                OnHandScore?.Invoke(handAttacking, blackHandPoints);
+                Debug.Log("Punto para la mano negra. " + blackHandPoints);
+            }
+        }
+
     }
 }

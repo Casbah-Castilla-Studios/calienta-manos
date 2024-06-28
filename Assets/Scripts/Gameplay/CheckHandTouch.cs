@@ -1,35 +1,40 @@
+using Calientamanos.Enums;
 using UnityEngine;
 
-public enum Hand { White, Black };
-
-public class CheckHandTouch : MonoBehaviour
+namespace Calientamanos.Gameplay
 {
-    [SerializeField] private Hand hand;
-
-    private Hand enemyHand;
-
-    public delegate void HandTouched(Hand hand, Hand enemyHand);
-    public static event HandTouched OnHandTouched;
-
-    public Hand Hand { get => hand; }
-
-    private void OnCollisionEnter(Collision collision)
+    public class CheckHandTouch : MonoBehaviour
     {
-        Debug.Log($"OnCollisionEnter with {collision.transform.name}");
+        [SerializeField] private EHand hand;
 
-        if (collision == null)
+        private EHand enemyHand;
+
+        public delegate void HandTouched(EHand hand, EHand enemyHand);
+        public static event HandTouched OnHandTouched;
+
+        public EHand Hand { get => hand; }
+
+        private void OnCollisionEnter(Collision collision)
         {
-            Debug.LogError("Mano sin box collider");
-            return;
-        }
+            Debug.Log($"OnCollisionEnter with {collision.transform.name}");
 
-        if (!collision.transform.TryGetComponent<CheckHandTouch>(out var enemyCheckHandTouch))
-        {
-            Debug.LogError("Objeto colisionado sin componente CheckHandTouch");
-            return;
-        }
+            if (collision == null)
+            {
+                Debug.LogError("Collision is null");
+                return;
+            }
 
-        enemyHand = enemyCheckHandTouch.Hand;
-        OnHandTouched?.Invoke(hand, enemyHand);
+            if (collision.transform.CompareTag("Player"))
+            {
+                if (!collision.transform.TryGetComponent<CheckHandTouch>(out var enemyCheckHandTouch))
+                {
+                    Debug.LogError("Collided object does not have CheckHandTouch component");
+                    return;
+                }
+
+                enemyHand = enemyCheckHandTouch.Hand;
+                OnHandTouched?.Invoke(hand, enemyHand);
+            }
+        }
     }
 }
